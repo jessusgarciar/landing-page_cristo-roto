@@ -1,0 +1,29 @@
+---
+const MAP_LAT = 22.145767;
+const MAP_LNG = -102.413217;
+---
+
+<footer class="bg-footer-dark px-md py-lg">
+  <div class="border-t border-white/10 mb-md"></div>
+  <a
+    href={`https://www.google.com/maps?q=${MAP_LAT},${MAP_LNG}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex items-center justify-center gap-sm no-underline mb-sm"
+  >
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8772E" stroke-width="2">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+    <span class="text-white text-base font-semibold" data-i18n="servicio_turistico">Servicio Turistico San Jose de Gracia</span>
+  </a>
+  <a
+    href={`https://www.google.com/maps?q=${MAP_LAT},${MAP_LNG}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex justify-center no-underline mb-lg"
+  >
+    <span class="text-white/70 text-[13px] underline decoration-white/70" data-i18n="ubicacion_footer">San Jose de Gracia, Aguascalientes, Mexico</span>
+  </a>
+  <p class="text-white/50 text-xs text-center m-0 pb-md" data-i18n="derechos_reservados">2026 - Todos los derechos reservados</p>
+</footer>

@@ -1,0 +1,88 @@
+---
+import AdminApp from '../../components/admin/AdminApp';
+import { firebaseConfig, firebaseDatabaseId } from '../../lib/firebase-config';
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1e293b" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admin - Cristo Roto</title>
+    <style is:inline>
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+      html,body,#admin-root{width:100%;height:100%;overflow:hidden}
+      body{font-family:'Segoe UI',system-ui,sans-serif;background:#1e293b;color:#e2e8f0}
+      @keyframes admin-spin{to{transform:rotate(360deg)}}
+      .admin-spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.15);border-top-color:#3B7DD8;border-radius:50%;animation:admin-spin .7s linear infinite}
+    </style>
+    <style is:inline>
+      .admin-shell,.admin-main,.admin-content{min-width:0}
+      .admin-table-scroll{-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+      .admin-pie-chart{min-width:0}
+
+      @media (max-width: 640px) {
+        .admin-shell{flex-direction:column!important;height:100dvh!important}
+        .admin-sidebar{width:100%!important;min-width:0!important;height:auto!important;max-height:none!important;flex:none!important;border-right:none!important;border-bottom:1px solid #1e293b!important}
+        .admin-sidebar-brand{padding:10px 14px!important}
+        .admin-sidebar-divider{margin:0!important}
+        .admin-nav{display:flex!important;flex:none!important;overflow-x:auto!important;overflow-y:hidden!important;padding:6px 8px!important;gap:2px;scrollbar-width:none;touch-action:pan-x}
+        .admin-nav::-webkit-scrollbar{display:none}
+        .admin-nav-item{width:auto!important;min-width:max-content;flex:0 0 auto;padding:8px 10px!important;margin:0!important;border-left:0!important;border-bottom:3px solid transparent!important;gap:6px!important;font-size:11px!important;white-space:nowrap}
+        .admin-nav-item-active{border-left:0!important;border-bottom-color:#3B7DD8!important}
+        .admin-sidebar-footer{display:none!important}
+        .admin-main{width:100%;min-height:0!important}
+        .admin-header{height:54px!important;min-height:54px!important;padding:0 14px!important;gap:10px}
+        .admin-title{font-size:15px!important;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .admin-user{gap:8px!important;min-width:0}
+        .admin-email{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px!important}
+        .admin-logout{padding:7px 10px!important;white-space:nowrap}
+        .admin-content{padding:14px!important;overflow-x:hidden}
+        .admin-table-scroll{width:100%;max-width:100%;overflow-x:auto!important}
+        .admin-table{min-width:700px}
+        .admin-coordinate-grid,.admin-question-grid{grid-template-columns:1fr!important}
+        .admin-dashboard-chart-grid{grid-template-columns:1fr!important;gap:14px!important;margin-bottom:14px!important}
+        .admin-dashboard-panel{padding:14px!important;min-width:0;overflow:hidden}
+        .admin-pie-chart{flex-wrap:wrap!important;justify-content:center!important}
+        .admin-feedback-panel>div:last-child>div{flex-wrap:wrap!important}
+        .admin-feedback-panel>div:last-child>div>span:last-child{width:100%;text-align:right}
+        .admin-form-dialog{width:calc(100vw - 16px)!important;max-width:none!important;max-height:calc(100dvh - 16px)!important}
+        .admin-form-dialog-header{padding:14px 16px!important}
+        .admin-form-dialog-body{padding:16px!important}
+        .admin-form-dialog-footer{padding:12px 16px!important;justify-content:stretch!important}
+        .admin-form-dialog-footer button{flex:1;min-height:40px}
+        .admin-confirm-dialog{width:calc(100vw - 32px)!important;max-width:none!important;padding:20px!important}
+        .admin-confirm-dialog-footer{justify-content:stretch!important}
+        .admin-confirm-dialog-footer button{flex:1;min-height:40px}
+        .admin-photo-grid{grid-template-columns:1fr!important}
+        .admin-photo-edit-dialog{width:calc(100vw - 32px)!important;max-width:none!important;padding:18px!important}
+        .admin-login-shell{padding:16px}
+        .admin-login-card{width:100%!important;max-width:none!important;padding:24px!important}
+      }
+    </style>
+    <script type="module" define:vars={{ config: firebaseConfig, firebaseDatabaseId }}>
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
+      import { getAuth, initializeAuth, browserLocalPersistence, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js';
+      import { getFirestore, collection, onSnapshot, addDoc, setDoc, deleteDoc, doc, writeBatch } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js';
+      import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-storage.js';
+
+      const app = initializeApp(config);
+      const auth = initializeAuth(app, { persistence: browserLocalPersistence });
+      const db = getFirestore(app, firebaseDatabaseId);
+      const storage = getStorage(app);
+
+      window.__fb = {
+        app, auth, db, storage,
+        signInWithEmailAndPassword,
+        signOut,
+        onAuthStateChanged,
+        collection, onSnapshot, addDoc, setDoc, deleteDoc, doc, writeBatch,
+        ref, uploadBytesResumable, getDownloadURL,
+      };
+    </script>
+  </head>
+  <body>
+    <AdminApp client:only="preact" />
+  </body>
+</html>

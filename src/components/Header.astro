@@ -1,0 +1,172 @@
+---
+---
+
+<a class="landing-skip" href="#contenido" data-i18n="saltar_contenido">Saltar al contenido</a>
+<header class="site-header bg-header-blue w-full px-md py-sm sticky top-0 z-50">
+  <div class="safe-top flex items-center justify-between">
+    <a href="#" class="flex items-center gap-sm no-underline" aria-label="Inicio">
+      <img
+        src="/assets/images/logo.webp"
+        alt="Logo"
+        width="44"
+        height="44"
+        class="w-[44px] h-[44px] object-contain flex-shrink-0"
+      />
+      <div class="flex flex-col leading-tight">
+        <span class="text-white text-lg font-bold" data-i18n="cristo_roto">Cristo Roto</span>
+        <span class="text-white/70 text-xs" data-i18n="san_jose_de_gracia">San Jose de Gracia</span>
+      </div>
+    </a>
+
+    <div class="flex items-center gap-sm">
+      <div class="lang-selector inline-flex items-center relative"></div>
+      <div class="relative">
+        <button
+          id="menu-toggle"
+          class="flex items-center gap-1 text-white text-sm font-medium bg-transparent border-none cursor-pointer px-sm py-xs"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="menu-dropdown"
+        >
+          <span data-i18n="menu">Menu</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform duration-200" id="menu-arrow">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div
+          id="menu-dropdown"
+          class="absolute right-0 top-full mt-1 w-56 bg-white rounded-md shadow-lg border border-divider opacity-0 invisible translate-y-[-8px] transition-all duration-200 z-50"
+        >
+          <a href="#inicio" class="flex items-center gap-sm px-md py-sm text-text-primary text-sm no-underline hover:bg-header-blue/5" data-section="inicio">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B7DD8" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span data-i18n="inicio">Inicio</span>
+          </a>
+          <a href="#destacados" class="flex items-center gap-sm px-md py-sm text-text-primary text-sm no-underline hover:bg-header-blue/5" data-section="destacados">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B7DD8" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span data-i18n="destacados">Destacados</span>
+          </a>
+          <a href="#restaurantes" class="flex items-center gap-sm px-md py-sm text-text-primary text-sm no-underline hover:bg-header-blue/5" data-section="restaurantes">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B7DD8" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            <span data-i18n="restaurantes">Restaurantes</span>
+          </a>
+          <a href="#comercios" class="flex items-center gap-sm px-md py-sm text-text-primary text-sm no-underline hover:bg-header-blue/5" data-section="comercios">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B7DD8" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <span data-i18n="comercios">Comercios</span>
+          </a>
+          <a href="#hospedajes" class="flex items-center gap-sm px-md py-sm text-text-primary text-sm no-underline hover:bg-header-blue/5" data-section="hospedajes">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B7DD8" stroke-width="2"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10M9 20v-6h6v6"/></svg>
+            <span data-i18n="hospedajes">Hospedajes</span>
+          </a>
+          <a href="#servicios" class="flex items-center gap-sm px-md py-sm text-text-primary text-sm no-underline hover:bg-header-blue/5" data-section="servicios">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B7DD8" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            <span data-i18n="servicios">Servicios</span>
+          </a>
+          <a href="#contacto" class="flex items-center gap-sm px-md py-sm text-text-primary text-sm no-underline hover:bg-header-blue/5" data-section="contacto">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B7DD8" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <span data-i18n="contacto">Contacto</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+(function() {
+  var toggle = document.getElementById('menu-toggle');
+  var dropdown = document.getElementById('menu-dropdown');
+  var arrow = document.getElementById('menu-arrow');
+  var open = false;
+  function closeMenu() {
+    open = false;
+    toggle.setAttribute('aria-expanded', 'false');
+    dropdown.classList.add('opacity-0','invisible');
+    dropdown.style.transform='translateY(-8px)';
+    arrow.style.transform = '';
+  }
+  function openMenu() {
+    open = true;
+    toggle.setAttribute('aria-expanded', 'true');
+    dropdown.classList.remove('opacity-0','invisible');
+    dropdown.style.transform='translateY(0)';
+    arrow.style.transform = 'rotate(180deg)';
+  }
+  toggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    open ? closeMenu() : openMenu();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (open && e.key === 'Escape') { closeMenu(); toggle.focus(); }
+  });
+  dropdown.addEventListener('focusout', function(e) {
+    if (open && !dropdown.contains(e.relatedTarget) && e.relatedTarget !== toggle) closeMenu();
+  });
+  document.addEventListener('click', function(e) {
+    if (open && !toggle.contains(e.target) && !dropdown.contains(e.target)) closeMenu();
+  });
+  dropdown.querySelectorAll('a[data-section]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      closeMenu();
+    });
+  });
+})();
+</script>
+
+<script is:inline>
+(function() {
+  var locales = ['es','en','ja'];
+  var flags = { es: '\uD83C\uDDF2\uD83C\uDDFD', en: '\uD83C\uDDFA\uD83C\uDDF8', ja: '\uD83C\uDDEF\uD83C\uDDF5' };
+  var labels = { es: 'Español', en: 'English', ja: '日本語' };
+  function getCurrent() {
+    var s = localStorage.getItem('locale');
+    if (s && locales.indexOf(s) >= 0) return s;
+    var b = navigator.language.slice(0,2);
+    if (locales.indexOf(b) >= 0) return b;
+    return 'es';
+  }
+  var current = getCurrent();
+  var container = document.querySelector('.lang-selector');
+  if (!container) return;
+  var isOpen = false;
+  function close() { isOpen = false; var d = container.querySelector('.lang-dropdown'); if (d) d.style.display = 'none'; var b = container.querySelector('button'); if (b) b.setAttribute('aria-expanded', 'false'); }
+  function render() {
+    var btn = document.createElement('button');
+    btn.setAttribute('aria-label','Idioma');
+    btn.style.cssText = 'width:48px;height:48px;border-radius:50%;border:2px solid white;display:flex;align-items:center;justify-content:center;background:transparent;cursor:pointer;font-size:22px;line-height:1;font-family:\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Noto Color Emoji\",sans-serif';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.textContent = flags[current] || flags.es;
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      isOpen = !isOpen;
+      btn.setAttribute('aria-expanded', String(isOpen));
+      var d = container.querySelector('.lang-dropdown');
+      if (d) d.style.display = isOpen ? 'block' : 'none';
+    });
+    var dd = document.createElement('div');
+    dd.className = 'lang-dropdown';
+    dd.style.cssText = 'display:none;position:absolute;right:0;top:100%;margin-top:4px;background:white;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,0.15);padding:4px 0;z-index:50;min-width:150px';
+    locales.forEach(function(loc) {
+      var item = document.createElement('button');
+      item.style.cssText = 'width:100%;min-height:48px;display:flex;align-items:center;gap:10px;padding:8px 16px;font-size:16px;font-weight:500;background:transparent;border:none;cursor:pointer;color:'+(current===loc?'#245fa8':'#333');
+      item.innerHTML = '<span style="font-size:22px;font-family:\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Noto Color Emoji\",sans-serif">' + flags[loc] + '</span><span>' + labels[loc] + '</span>';
+      item.addEventListener('click', function() {
+        close();
+        if (typeof changeLang === 'function') changeLang(loc);
+      });
+      dd.appendChild(item);
+    });
+    container.innerHTML = '';
+    container.appendChild(btn);
+    container.appendChild(dd);
+   }
+   render();
+   window.addEventListener('langchange', function() {
+     current = getCurrent();
+     isOpen = false;
+     render();
+   });
+    document.addEventListener('click', function() { close(); });
+    document.addEventListener('keydown', function(e) { if (isOpen && e.key === 'Escape') { close(); container.querySelector('button').focus(); } });
+    container.addEventListener('focusout', function(e) { if (!container.contains(e.relatedTarget)) close(); });
+ })();
+</script>

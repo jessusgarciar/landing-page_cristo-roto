@@ -1,0 +1,82 @@
+---
+import type { Shop } from '../lib/firebase';
+
+interface Props {
+  shops: Shop[];
+}
+
+const { shops } = Astro.props as Props;
+---
+
+<section id="comercios" class="bg-bg-cream px-md py-lg md:py-xl">
+  <div class="flex items-center gap-sm mb-md">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2">
+      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 01-8 0"/>
+    </svg>
+    <h2 class="text-[22px] font-bold text-text-primary" data-i18n="puestos_comercios">Puestos y Comercios</h2>
+  </div>
+
+  <div class="flex flex-col gap-md">
+    {shops.map((s) => (
+      <div
+        class="shop-card bg-card-white rounded-lg shadow-[0_1px_3px_rgba(0,0,0,0.12)] p-md cursor-pointer transition-all duration-250 hover:-translate-y-[2px] hover:shadow-lg"
+        data-name={s.name}
+        data-description={s.description}
+        data-schedule={s.schedule}
+        data-phone={s.phone}
+        data-image={s.imagePath || ''}
+        data-logo={s.logoPath || ''}
+        data-address={s.address || ''}
+        data-offers={JSON.stringify(s.offers || [])}
+        data-lat={s.latitude?.toString() || ''}
+        data-lng={s.longitude?.toString() || ''}
+      >
+        <h3 class="text-base font-bold text-text-primary leading-tight mb-1">{s.name}</h3>
+        <p class="text-[13px] text-text-secondary leading-snug mb-sm">{s.description}</p>
+        <div class="flex items-center gap-1 text-xs text-text-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>{s.schedule}</span>
+        </div>
+        {s.phone && (
+          <div class="flex items-center gap-1 mt-1">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1976D2" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <a href={`tel:${s.phone}`} class="text-xs text-phone-blue font-medium no-underline hover:underline" onclick="event.stopPropagation()">{s.phone}</a>
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <div class="mt-md w-full bg-green-dark/10 rounded-md p-md text-center">
+    <p class="text-sm text-green-dark font-medium m-0" data-i18n="tienes_puesto">Tienes un puesto? Contactanos para promocionarte aqui.</p>
+  </div>
+</section>
+
+<script is:inline>
+(function() {
+  document.querySelectorAll('.shop-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var lat = card.getAttribute('data-lat');
+      var lng = card.getAttribute('data-lng');
+      var coordinates = null;
+      if (lat && lng) coordinates = { lat: parseFloat(lat), lng: parseFloat(lng) };
+      window.dispatchEvent(new CustomEvent('open-place-popup', {
+        detail: {
+          name: card.getAttribute('data-name'),
+          description: card.getAttribute('data-description'),
+          schedule: card.getAttribute('data-schedule'),
+          phone: card.getAttribute('data-phone'),
+          imagePath: card.getAttribute('data-image'),
+          logoPath: card.getAttribute('data-logo'),
+          address: card.getAttribute('data-address'),
+          offers: JSON.parse(card.getAttribute('data-offers') || '[]'),
+          coordinates: coordinates,
+          showOffersTab: true,
+        }
+      }));
+    });
+  });
+})();
+</script>

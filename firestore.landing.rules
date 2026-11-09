@@ -1,0 +1,48 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/landing-db/documents {
+    function isStaff() {
+      return request.auth != null && (request.auth.token.admin == true || request.auth.token.superadmin == true);
+    }
+    match /carousel/{document} {
+      allow read: if true;
+      allow write: if isStaff();
+    }
+    match /destacados/{document} {
+      allow read: if true;
+      allow write: if isStaff();
+    }
+    match /restaurantes/{document} {
+      allow read: if true;
+      allow write: if isStaff();
+    }
+    match /puestos/{document} {
+      allow read: if true;
+      allow write: if isStaff();
+    }
+    match /hospedajes/{document} {
+      allow read: if true;
+      allow write: if isStaff();
+    }
+    match /servicios/{document} {
+      allow read: if true;
+      allow write: if isStaff();
+    }
+    match /preguntas/{document} {
+      allow read: if true;
+      allow update: if true;
+      allow create, delete: if isStaff();
+    }
+    match /feedback/{document} {
+      allow read: if isStaff();
+      allow create: if true;
+      allow update, delete: if isStaff();
+    }
+
+    match /fotos_turistas/{document} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if isStaff();
+    }
+  }
+}

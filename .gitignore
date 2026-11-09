@@ -1,0 +1,46 @@
+# Dependencias y archivos generados
+node_modules/
+dist/
+build/
+.sst/
+.astro/
+.firebase/
+.cache/
+coverage/
+*.tsbuildinfo
+
+# Configuración local y credenciales
+.env
+.env.*
+!.env.example
+*.local
+.firebaserc
+.npmrc
+.pnpmrc
+credentials/
+secrets/
+service-account*.json
+serviceAccount*.json
+*firebase-adminsdk*.json
+credentials*.json
+secrets.*
+google-services.json
+GoogleService-Info.plist
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Logs, respaldos y archivos del sistema
+*.log
+*.bak
+*.backup
+*.zip
+*.7z
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/

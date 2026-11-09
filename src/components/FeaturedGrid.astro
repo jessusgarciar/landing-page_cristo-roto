@@ -1,0 +1,45 @@
+---
+import type { FeaturedItem } from '../lib/firebase';
+
+interface Props {
+  items: FeaturedItem[];
+}
+
+const { items } = Astro.props as Props;
+---
+
+<section id="destacados" class="px-md py-lg md:py-xl">
+  <h2 class="text-[22px] font-bold text-text-primary mb-lg" data-i18n="lo_destacado">Lo Destacado</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+    {items.map((item) => (
+      <div
+        class={`bg-card-white rounded-lg shadow-[0_1px_3px_rgba(0,0,0,0.12)] p-md flex flex-col items-center text-center cursor-pointer transition-shadow duration-200 hover:shadow-md ${item.icon === '📸' || item.title.includes('Vista') ? 'featured-photo-card' : ''}`}
+        data-icon={item.icon}
+        data-title={item.title}
+        data-description={item.description}
+      >
+        <span class="text-[36px] leading-none mb-sm">{item.icon}</span>
+        <span class="text-sm font-semibold text-text-primary leading-tight">{item.title}</span>
+        {!(item.icon === '📸' || item.title.includes('Vista')) && (
+          <span class="text-xs text-text-secondary leading-snug mt-xs line-clamp-3">{item.description}</span>
+        )}
+        {(item.icon === '📸' || item.title.includes('Vista')) && (
+          <span class="mt-md inline-flex items-center gap-xs rounded-pill bg-header-blue/10 px-sm py-xs text-[11px] font-semibold text-header-blue" data-i18n="comparte_tu_momento">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            Comparte tu momento
+          </span>
+        )}
+      </div>
+    ))}
+  </div>
+</section>
+
+<script is:inline>
+(function() {
+  document.querySelectorAll('.featured-photo-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      window.dispatchEvent(new CustomEvent('open-photo-gallery'));
+    });
+  });
+})();
+</script>

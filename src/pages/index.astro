@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../components/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import BlueBanner from '../components/BlueBanner.astro';
+import FeaturedGrid from '../components/LiveFeaturedGrid';
+import RestaurantSection from '../components/LiveRestaurantSection';
+import ShopSection from '../components/LiveShopSection';
+import LodgingSection from '../components/LiveLodgingSection';
+import ServiceSection from '../components/LiveServiceSection';
+import Footer from '../components/Footer.astro';
+import HeroCarousel from '../components/HeroCarousel';
+import PlacePopup from '../components/PlacePopup';
+import PhotoGallery from '../components/PhotoGallery';
+import FeedbackForm from '../components/FeedbackForm';
+
+import '../styles/global.css';
+
+import es from '../data/locales/es.json';
+import en from '../data/locales/en.json';
+import ja from '../data/locales/ja.json';
+import { mockLodgings } from '../data/mockLodgings';
+
+import {
+  getCarouselItems,
+  getFeaturedItems,
+  getRestaurants,
+  getShops,
+  getLodgings,
+  getServices,
+} from '../lib/firestore-server';
+
+const [carousel, destacados, restaurantes, puestos, hospedajes, servicios] = await Promise.all([
+  getCarouselItems(),
+  getFeaturedItems(),
+  getRestaurants(),
+  getShops(),
+  getLodgings(),
+  getServices(),
+]);
+
+const mockCarousel = carousel.length > 0 ? carousel : [
+  { id: 'm1', imagePath: '/assets/images/carrusel_img1.webp', title: 'Cristo Roto', subtitle: 'El Cristo Roto te espera' },
+  { id: 'm2', imagePath: '/assets/images/carrusel_img2.jpg', title: 'Cristo Roto', subtitle: 'Una experiencia única' },
+  { id: 'm3', imagePath: '/assets/images/carrusel_img3.webp', title: 'Cristo Roto', subtitle: 'Atardeceres inolvidables' },
+];
+
+const mockFeatured = destacados.length > 0 ? destacados : [
+  { id: 'f1', icon: '⛵', title: 'Traslado en Lancha', description: 'Traslado directo al Cristo Roto. Salidas de 8:00 am a 5:00 pm.' },
+  { id: 'f2', icon: '📸', title: 'Comparte tu momento', description: 'Sube una foto de tu visita en familia y crea recuerdos con nosotros.' },
+  { id: 'f3', icon: '🛡️', title: 'Presa Segura', description: 'Lanchas certificadas, chalecos salvavidas y guías locales experimentados.' },
+  { id: 'f4', icon: '🎫', title: 'Precios Accesibles', description: 'Tarifas especiales para familias, adultos mayores y grupos.' },
+];
+
+const mockRestaurants = restaurantes.length > 0 ? restaurantes : [
+  { id: 'r1', name: 'Restaurante El Encanto', description: 'Birria de borrego, filetes, camarón, pescados, ceviches.', imagePath: '/assets/images/restaurante1.webp', schedule: '10:00 am - 7:00 pm', phone: '449-742-0101', offers: ['Birria de borrego', 'Filetes de res', 'Camarones al ajillo'] },
+  { id: 'r2', name: 'Bar Playas 2', description: 'Restaurante familiar ideal para comer después del recorrido.', imagePath: '/assets/images/restaurante3.webp', schedule: '11:00 am - 6:00 pm', phone: '449-742-0202', offers: ['Ceviche de pescado', 'Mojarra frita'] },
+];
+
+const mockShops = puestos.length > 0 ? puestos : [
+  { id: 's1', name: 'Artesanías del Cristo', description: 'Réplicas artesanales, recuerdos únicos y piezas de colección.', schedule: '8:00 am - 6:00 pm', phone: '465-742-0401', offers: ['Figuras del Cristo', 'Recuerdos pintados'] },
+  { id: 's2', name: 'Nieves y Raspados El Cristo', description: 'Nieves artesanales, raspados de sabores y paletas naturales.', schedule: '11:00 am - 6:00 pm', phone: '465-742-0403', offers: ['Nieve de fresa', 'Raspado de limón'] },
+];
+
+const mockLodgingItems = hospedajes.length > 0 ? hospedajes : mockLodgings;
+
+const mockServices = servicios.length > 0 ? servicios : [
+  { id: 'sv1', icon: 'anchor', name: 'Embarcadero Principal', description: 'Compra tu boleto de lancha. Personal capacitado te orienta.', schedule: 'Lunes a Viernes', phone: '465-742-0001', offers: [] },
+  { id: 'sv2', icon: 'parking', name: 'Estacionamiento', description: 'Parqueadero seguro.', schedule: '5:00 am - 8:00 pm', phone: '449-742-0002', offers: [] },
+];
+---
+
+<BaseLayout>
+  <Header />
+  <main id="contenido" class="landing-content">
+  <HeroCarousel items={mockCarousel} client:load />
+  <BlueBanner />
+  <FeaturedGrid items={mockFeatured} client:load />
+  <RestaurantSection restaurants={mockRestaurants} client:load />
+  <ShopSection shops={mockShops} client:load />
+  <LodgingSection lodgings={mockLodgingItems} client:load />
+  <ServiceSection services={mockServices} client:load />
+  <FeedbackForm client:only="preact" />
+  </main>
+  <Footer />
+  <PlacePopup client:only="preact" />
+  <PhotoGallery client:only="preact" />
+
+  <script define:vars={{ es, en, ja }}>
+    var TRANSLATIONS = {
+      es: es,
+      en: en,
+      ja: ja
+    };
+    function applyI18n(loc) {
+      if (!TRANSLATIONS[loc]) return;
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var k = el.getAttribute('data-i18n');
+        if (k && TRANSLATIONS[loc][k]) el.textContent = TRANSLATIONS[loc][k];
+      });
+      document.querySelectorAll('[data-i18n-ph]').forEach(function(el) {
+        var k = el.getAttribute('data-i18n-ph');
+        if (k && TRANSLATIONS[loc][k]) el.placeholder = TRANSLATIONS[loc][k];
+      });
+    }
+    var initLoc = localStorage.getItem('locale') || 'es';
+    applyI18n(initLoc);
+    window.changeLang = function(l) {
+      localStorage.setItem('locale', l);
+      document.documentElement.lang = l;
+      applyI18n(l);
+      try { window.dispatchEvent(new Event('langchange')); } catch(_) {}
+    };
+  </script>
+</BaseLayout>

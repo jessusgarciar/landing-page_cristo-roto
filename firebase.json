@@ -1,0 +1,43 @@
+{
+  "hosting": {
+    "site": "cristoroto-san-jose",
+    "public": "build",
+    "redirects": [],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/sjg-admin/**",
+        "destination": "/sjg-admin/index.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(js|css|wasm|woff2|webp|png|jpg|jpeg|svg|ttf|otf)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        ]
+      },
+      {
+        "source": "**/*.@(html|json)",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=3600" }
+        ]
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.landing.rules",
+    "indexes": "firestore.landing.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}
