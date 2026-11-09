@@ -33,6 +33,7 @@ GoogleService-Info.plist
 *.jks
 *.keystore
 
+
 # Logs, respaldos y archivos del sistema
 *.log
 *.bak
